@@ -28,19 +28,20 @@ class ProductController extends Controller
 
     ]);
 
-    /* $fileExtension =  $req->file->extension();
+    $fileExtension =  $req->productImage->extension();
         $timeStamp = Carbon::now()->format('Y_m_d_H_i_s_u');
         $fileName = $timeStamp.'.'.$fileExtension;
 
-    $req->file->storeAs('public/images', $fileName);  */
+    $req->productImage->storeAs('public/images', $fileName); 
 
 
     $product = new Product;
     $product->productName = $req->productName;
     $product->sku = $req->sku;
     $product->quantity = $req->quantity;
-    $product->productImage = $req->productImage;
+    $product->productImage = $fileName;
     $product->save();
+    return redirect()->route("list")->with("success",'file submitted');
 }
 function list(){
         $product = Product::all();
@@ -56,7 +57,7 @@ function list(){
             'productName' => 'required',
             'sku'=> 'required',
             'quantity'=> 'required',
-            'productImage' => 'required|image|mimes:jpg,png,gif,svg,jpeg,csv|max:2048',
+            'productImage' => 'required|image',
             
         ],[
             'productName.required' => 'Product Name is Required',
@@ -64,21 +65,28 @@ function list(){
             'quantity' => 'Quantity is required',
             'productImage' => 'Product Image is required',
             'productImage.image' => "Plz upload the image",
-            'productImage.mimes'=> "File is not supported image",
     
         ]);
-        $product = new Product;
+
+        $fileExtension =  $req->productImage->extension();
+        $timeStamp = Carbon::now()->format('Y_m_d_H_i_s_u');
+        $fileName = $timeStamp.'.'.$fileExtension;
+
+    $req->productImage->storeAs('public/images', $fileName); 
+
+
+        $product = Product::find($id);
         $product->productName = $req->productName;
         $product->sku = $req->sku;
         $product->quantity = $req->quantity;
-        $product->productImage = $req->productImage;
+        $product->productImage = $fileName;
         $product->update();
         return redirect()->route('list')->with("success",'Updated Successfully');
 
     }
-    function destroy(){
-        return view::make('frontend.productDestroy');
-
-
-    }
+    function destroy($id){
+        $product = Product::find($id);
+        $product->delete();
+        return redirect()->route('list')->with("success",'file is deleted');
+     }
 }

@@ -17,8 +17,9 @@
     <span style = "color:red">@error('quantity'){{$message}}@enderror</span>
     <label>PRODUCT IMAGE</label>
     <input class = "" type = "file" value = "{{$data['productImage']}}" name = "productImage"><br>
+    <td><img src="{{asset('storage/images/'.$data->productImage)}}" width="100px;" height="100px;" alt="Image"></td>
     <span style = "color:red">@error('productImage'){{$message}}@enderror</span>
-    <input type = "submit" value = "update" name = "submit"/>
+    <input type = "submit"  value = "update" name = "submit"/>
 </form>
 </body>
 </html>

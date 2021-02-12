@@ -15,17 +15,12 @@ class UserController extends Controller
     function store(Request $req){
         $req->validate([
             'name' => 'required|min:6|max:10',
-            'gender' => 'required|in:male,female',
-            'address' => 'required',
-             'email' => 'required',
+            'email' => 'required',
             'password' => 'required|min:6|regex:/[@!$%]/',
         ],[
             'name.required' => 'Name is Required',
             'name.min' => 'Name should be atleast :min characters',
             'name.max' => 'Name should not be greater than :max characters',
-            'gender.required' => 'Gender is Required',
-            'gender.in' => 'select atleast one gender',
-            'address.required'=> 'Address is Required',
             'email.required' => 'Email is Required',
             'password.required' => 'Password is Required',
             'password.min' => 'Password should be atleast :min characters',
@@ -33,10 +28,9 @@ class UserController extends Controller
         ]);
         $user = new User;
         $user->name = $req->name;
-        $user->gender = $req->gender;
-        $user->address = $req->address;
         $user->email = $req->email;
         $user->password = Hash::make($req->password);
+        $user ->roleid = config('role.role.User'); 
         $user->save();
 
     }
@@ -46,9 +40,13 @@ class UserController extends Controller
     function manager(){
         return view::make('backends.manager');
     }
-    function customer(){
+    function createCustomer(){
        
-        return view::make('backends.customer');
+        return view::make('customer.createCustomer');
+    }
+    function listCustomer(){
+        $customer = User::orderBy('id', 'asc')->where('roleid',config('role.role.User'))->paginate(config('role.pagination'));
+        return view::make('customer.listCustomer',['users'=>$customer]);
     }
     function product(){
         return view::make('frontend.product');

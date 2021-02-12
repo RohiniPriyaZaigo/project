@@ -29,7 +29,7 @@ class AlterToUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            schema::dropIfExists('roleid');
+            schema::dropIfExists('users');
         });
     }
 }
