@@ -32,21 +32,45 @@ class AdminController extends Controller
         $admin ->password = Hash::make($req->password);
         $admin ->roleid = config('role.role.Admin');   
         $admin ->save();
+        return redirect()->route('listAdmin')->with("success",'Updated Successfully');
     }
     function listAdmin()
     {
         $admin = User::orderBy('id', 'asc')->where('roleid',config('role.role.Admin'))->paginate(config('role.pagination'));
-        return view::make('admin.adminList',['users'=>$admin]);
+        return view::make('admin.adminList',['admins'=>$admin]);
 
     }
     function editAdmin($id){
         $admin = User::find($id);
-        return view::make('admin.adminEdit',['data'=> $admin]);
+        return view::make('admin.adminEdit',['admin'=> $admin]);
 
     }
-    function updateAdmin(){
+    function updateAdmin(Request $req, $id){
+        $req->validate([
+            'name' => 'required',
+            'email'=> 'required',
+            'password'=> 'required',
+            
+            
+            
+        ],[
+            'name.required' => ' Admin Name is Required',
+            'email' => 'Email is required',
+            'password' => 'Password is required',
+    
+        ]);
+        $admin = User::find($id);
+        $admin ->name = $req->name;
+        $admin ->email = $req->email;
+        $admin ->password = Hash::make($req->password);
+        $admin ->roleid = config('role.role.Admin');   
+        $admin ->save();
+        return redirect()->route('listAdmin')->with("success",'Updated Successfully');
     }
-    function destroyAdmin(){
+    function destroyAdmin($id){
+        $product = User::find($id);
+        $product->delete();
+        return redirect()->route('listAdmin')->with("success",'file is deleted');
 
     }
 }

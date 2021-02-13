@@ -1,4 +1,5 @@
-
+@extends('backend.layouts.app')
+@section('content')
 <html>
     <head>
         <meta charset="utf-8">
@@ -45,3 +46,4 @@
         </form>
         </body>
 </html>
+@endsection

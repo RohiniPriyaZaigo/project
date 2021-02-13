@@ -30,10 +30,10 @@
             <div class="btn-group">
     
     <div class="">
-    <a class="" href="{{route('admin')}}"><button type="submit" class="btn btn-danger">Admin</button></a><br>
-      <a class="" href="{{route('manager')}}"><button type="submit" class="btn btn-danger">Manager</button></a><br>
+    <a class="" href="{{route('listAdmin')}}"><button type="submit" class="btn btn-danger">Admin</button></a><br>
+      <a class="" href="{{route('listManager')}}"><button type="submit" class="btn btn-danger">Manager</button></a><br>
       <a class="" href="{{route('customer')}}"><button type="submit" class="btn btn-danger">Customer</button></a><br>
-      <a class="" href="{{route('list')}}"><button type="submit" class="btn btn-danger">Product</button></a>
+      <a class="" href="{{route('index')}}"><button type="submit" class="btn btn-danger">Product</button></a>
     </div>
             
           </li>

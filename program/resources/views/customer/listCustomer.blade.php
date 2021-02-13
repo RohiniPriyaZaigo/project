@@ -1,3 +1,5 @@
+@extends('backend.layouts.app')
+@section('content')
 <h1>Customer List</h1>
 <style>
   table, th, td {
@@ -10,22 +12,22 @@
     <th>Email</th>
     <th>Password</th>
 </tr>
-@forelse ($users as  $user)
+@forelse ($customers as  $customer)
     <tr>
-        <td>{{$user->name}}</td>
-        <td>{{$user->email}}</td>
-        <td>{{$user->password}}</td>
-        <td><a href="{{route('edit', $user->id)}}"> <button type="submit" class="btn btn-primary">Edit</button></td>
-
-        <!-- <td>
-        <form action = "{{route('delete',['id'=>$user->id])}}" method="post">
+        <td>{{$customer->name}}</td>
+        <td>{{$customer->email}}</td>
+        <td>{{$customer->password}}</td>
+        <td><a href="{{route('editCustomer', $customer->id)}}">Edit</td>
+        <td>
+        <form action = "{{route('destroyCustomer',['id'=>$customer->id])}}" method="post">
         @csrf
         @method('DELETE')
-        <input type="submit" value="delete">
+        <button type="submit">Delete</button>
         </td> 
-        </form> -->
+        </form>
     </tr>
 @empty
     <p> no records</p>
 @endforelse
 </table>
+@endsection

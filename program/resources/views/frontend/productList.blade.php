@@ -1,4 +1,5 @@
-
+@extends('backend.layouts.app')
+@section('content')
 <h1> Product List </h1>
 <style>
   table, th, td {
@@ -18,13 +19,13 @@
         <td>{{$user->sku}}</td>
         <td>{{$user->quantity}}</td>
         <td><img src="{{asset('storage/images/'.$user->productImage)}}" width="100px;" height="100px;" alt="Image"></td>
-        <td><a href="{{route('edit', $user->id)}}"> <button type="submit" class="btn btn-primary">Edit</button></td>
+ <td><a href="{{route('edit', $user->id)}}">Edit</a></td>
 
         <td>
         <form action = "{{route('delete',['id'=>$user->id])}}" method="post">
         @csrf
         @method('DELETE')
-        <input type="submit" value="delete">
+        <button type="submit">Delete</button>
         </td> 
         </form>
     </tr>
@@ -32,6 +33,7 @@
     <p> no records</p>
 @endforelse
 </table>
+@endsection
 
 
 

@@ -68,18 +68,13 @@ function list(){
     
         ]);
 
-        $fileExtension =  $req->productImage->extension();
-        $timeStamp = Carbon::now()->format('Y_m_d_H_i_s_u');
-        $fileName = $timeStamp.'.'.$fileExtension;
-
-    $req->productImage->storeAs('public/images', $fileName); 
 
 
         $product = Product::find($id);
         $product->productName = $req->productName;
         $product->sku = $req->sku;
         $product->quantity = $req->quantity;
-        $product->productImage = $fileName;
+        $product->productImage = $req->productImage;
         $product->update();
         return redirect()->route('list')->with("success",'Updated Successfully');
 
@@ -89,4 +84,5 @@ function list(){
         $product->delete();
         return redirect()->route('list')->with("success",'file is deleted');
      }
+     
 }
