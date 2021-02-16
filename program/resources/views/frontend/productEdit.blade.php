@@ -3,7 +3,7 @@
 <h1>EDIT FORM</h1>
 <html>
 <body>
-<form action ="{{route('update',$data->id)}}" method = "POST">
+<form action ="{{route('update',$data->id)}}" method = "POST" enctype = "multipart/form-data">
     @csrf 
     @method('put')
     <label>PRODUCT NAME</label>

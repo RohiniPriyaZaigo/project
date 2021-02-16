@@ -17,7 +17,7 @@
                   <h4>{{$product->sku}}</h4>
                   <h4>{{$product->qunatity}}</h4>
                   <h4>{{$product->productImage}}</h4>
-                  <p class="btn-holder"><a href="" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> </p>
+                  <p class="btn-holder"><a href="{{route('home')}}" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> </p>
                 </div>
                 </div>
                  </div>

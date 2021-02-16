@@ -2,7 +2,7 @@
 @section('content')
 <h1>EDIT FORM</h1>
 
-<form action ="{{route('updateAdmin',$admin['id'])}}" method = "POST">
+<form action ="{{route('updateAdmin',$admin['id'])}}" method = "POST" enctype = "multipart/form-data">
     @csrf 
     @method('put')
     <label>NAME</label>

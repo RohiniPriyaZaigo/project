@@ -3,7 +3,7 @@
 <form action="" method="post"  enctype="multipart/form-data">
 <div class="col-6">
 <label>ADDRESS:</label>
-<input type="text"  value="" class=""/>
+<input type="text"  value="" class="form-group col-md-8" name="address" style="width: 300px; height: 100px; "/>
 </div>
 <div class="col-6">
 <input type="checkbox" id="" name="" value="">

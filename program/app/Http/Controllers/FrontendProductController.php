@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use App\Models\Product;
+use Auth;
 
 class FrontendProductController extends Controller
 {
@@ -14,6 +15,9 @@ class FrontendProductController extends Controller
     }
     function productAdd(){
         return view::make('product.productAdd');
+       /*  auth()->user()->id;
+        auth()->user()->address; */
 
-     }
+    }
+    
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use App\Models\Product;
 use Carbon\Carbon;
+use Auth;
 
 class ProductController extends Controller
 {   function add(){
@@ -40,6 +41,7 @@ class ProductController extends Controller
     $product->sku = $req->sku;
     $product->quantity = $req->quantity;
     $product->productImage = $fileName;
+    //$product->user_id = Auth::user()->id;
     $product->save();
     return redirect()->route("list")->with("success",'file submitted');
 }
@@ -57,7 +59,7 @@ function list(){
             'productName' => 'required',
             'sku'=> 'required',
             'quantity'=> 'required',
-            'productImage' => 'required|image',
+            'productImage' => 'required',
             
         ],[
             'productName.required' => 'Product Name is Required',
@@ -67,21 +69,27 @@ function list(){
             'productImage.image' => "Plz upload the image",
     
         ]);
+        $fileExtension =  $req->productImage->extension();
+        $timeStamp = Carbon::now()->format('Y_m_d_H_i_s_u');
+        $fileName = $timeStamp.'.'.$fileExtension;
 
+        $req->productImage->storeAs('public/images', $fileName); 
 
 
         $product = Product::find($id);
         $product->productName = $req->productName;
         $product->sku = $req->sku;
         $product->quantity = $req->quantity;
-        $product->productImage = $req->productImage;
+        $product->productImage = $fileName ;
         $product->update();
         return redirect()->route('list')->with("success",'Updated Successfully');
 
     }
     function destroy($id){
         $product = Product::find($id);
+        if(!empty($product)){
         $product->delete();
+        }
         return redirect()->route('list')->with("success",'file is deleted');
      }
      

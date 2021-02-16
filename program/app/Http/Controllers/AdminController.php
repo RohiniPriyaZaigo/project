@@ -68,9 +68,12 @@ class AdminController extends Controller
         return redirect()->route('listAdmin')->with("success",'Updated Successfully');
     }
     function destroyAdmin($id){
-        $product = User::find($id);
-        $product->delete();
+        $admin = User::find($id);
+        if(!empty($admin)){
+        $admin->delete();
+        }
         return redirect()->route('listAdmin')->with("success",'file is deleted');
+        }
 
-    }
+    
 }

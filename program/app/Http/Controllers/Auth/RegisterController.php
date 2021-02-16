@@ -73,7 +73,7 @@ use RegistersUsers;
             'password' => Hash::make($data['password']),
             'roleid' => config('role.role.Admin'),
             //'roleid' => config('role.role.Manager'),
-           //'roleid' => config('role.role.User'),
+            //'roleid' => config('role.role.User'),
             
 
         ]);

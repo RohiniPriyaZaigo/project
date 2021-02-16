@@ -66,7 +66,9 @@ class ManagerController extends Controller
     }
     function destroyManager($id){
         $manager = User::find($id);
+        if(!empty($manager)){
         $manager->delete();
+        }
         return redirect()->route('listManager')->with("success",'file is deleted');
 
     }

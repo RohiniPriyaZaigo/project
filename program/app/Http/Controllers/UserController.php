@@ -72,7 +72,9 @@ class UserController extends Controller
     }
     function destroyCustomer($id){
         $user = User::find($id);
+        if(!empty($user)){
         $user->delete();
+        }
         return redirect()->route('listCustomer')->with("success",'file is deleted');
     }
     
